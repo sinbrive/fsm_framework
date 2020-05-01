@@ -3,7 +3,7 @@
 ### how to:
 1. Create your state and event names (here LOCKED, UNLOCKED, COIN ...)
 2. write your transition functions (here lock(), unlock()...)
-2. get your transition table and add it by using the method addTransition (here turnstile.addTransition(LOCKED, COIN, unlock, UNLOCKED)) : if in state LOCKED, COIN event is received, execute unlock() and switch to UNLOCKED state.
+2. get your transition table and add it by using the method addTransition (here turnstile.addTransition(LOCKED, COIN, unlock, UNLOCKED)) : if in state LOCKED, COIN event is received, call unlock() and switch to UNLOCKED state.
 2. write your eventManager (here processEvent()) [no event -> event=-1]
 
 ### example of main
