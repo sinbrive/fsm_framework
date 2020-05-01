@@ -1,57 +1,57 @@
 #include <vector>
 
 class transition {
-    public:
-        int state;
-        int event;
-        void( * eventActFun)();
-        int nextState;
+  public:
+    int state;
+  int event;
+  void( * eventActFun)();
+  int nextState;
 };
 
 class fsm {
-    private:
-        std::vector <transition> fsmTable;
-        int curState; 
+  private:
+	std::vector < transition > fsmTable;
+	int curState;
 
-    public:
-        fsm(int istate) {
-  	   curState = istate;
-        }
+	/*state update*/
+	void ToNewState(int istate) {
+		curState = istate;
+	}
 
-    	int getCurState() {
-           return curState;
-    	}
-
-    /*state update*/
-    void ToNewState(int istate) {
-        curState = istate;
+  public:
+    fsm(int istate) {
+		curState = istate;
     }
 
-    /*event handler */
-    void eventHandler(int event) {
-        void( * eventAction)() = NULL;
-        int currentState = curState;
+  int getCurState() {
+    return curState;
+  }
 
-        for (int j = 0; j < fsmTable.size(); j++) {
-            if (event == fsmTable[j].event && currentState == fsmTable[j].state) {
-                eventAction = fsmTable[j].eventActFun;
-                if (eventAction) eventAction();  
-                ToNewState(fsmTable[j].nextState);
-                break;
-            }
-        }
-    }
+  /*event handler */
+  void eventHandler(int event) {
+    void( * eventAction)() = NULL;
+    int currentState = curState;
 
-    void addTransition(int state, int event, void( * eventActFun)(), int nextState) {
-        transition v;
-        v.state = state;
-        v.event = event;
-        v.eventActFun = eventActFun;
-        v.nextState = nextState;
-        fsmTable.push_back(v);
+    for (int j = 0; j < fsmTable.size(); j++) {
+      if (event == fsmTable[j].event && currentState == fsmTable[j].state) {
+        eventAction = fsmTable[j].eventActFun;
+        if (eventAction) eventAction();
+        ToNewState(fsmTable[j].nextState);
+        break;
+      }
     }
-		
-    int getcurState() {
-        return curState;
-    }
+  }
+
+  void addTransition(int state, int event, void( * eventActFun)(), int nextState) {
+    transition v;
+    v.state = state;
+    v.event = event;
+    v.eventActFun = eventActFun;
+    v.nextState = nextState;
+    fsmTable.push_back(v);
+  }
+
+  int getcurState() {
+    return curState;
+  }
 };
