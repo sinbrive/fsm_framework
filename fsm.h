@@ -15,7 +15,7 @@ class fsm {
 
     public:
         fsm(int istate) {
-            curState = istate;
+  	curState = istate;
         }
 
     int getCurState() {
