@@ -15,12 +15,12 @@ class fsm {
 
     public:
         fsm(int istate) {
-  	curState = istate;
+  	   curState = istate;
         }
 
-    int getCurState() {
-        return curState;
-    }
+    	int getCurState() {
+           return curState;
+    	}
 
     /*state update*/
     void ToNewState(int istate) {
