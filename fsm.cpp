@@ -6,8 +6,6 @@ Application case : wikipedia coin-operated turnstile
 #include <iostream>
 #include "fsm.h"
 
-using namespace std;
-
 //states
 enum {
     LOCKED = 0,
