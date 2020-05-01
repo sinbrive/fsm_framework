@@ -1,5 +1,6 @@
 /*********************************************************************
 sinbrive april 2020
+forked from :Li Junshi
 File Decription: Finite State Machine general framework
 *********************************************************************/
 #include <iostream>
@@ -16,55 +17,38 @@ class transition {
     int nextState;
 };
 
-class _FSM_t {
+class fsm {
     private:
-        int curState; //FSM
+        int _g_max_num;
+    vector < transition > caseTable;
+    int curState; //FSM
     transition * FsmTable; //table d'état
 
     public:
-
-        int getCurState() {
-            return curState;
+        fsm(int istate) {
+            curState = istate;
         }
 
-    void setCurState(int state) {
-        curState = state;
+    int getCurState() {
+        return curState;
     }
 
-    // setFsmTable(transition *t){
-    // 	FsmTable=t;
-    // }
-};
-
-class fsm {
-
-    private:
-        int _g_max_num;
-    _FSM_t pFsm;
-    vector < transition > caseTable;
-
-    public:
-        fsm(int istate) {
-            //	_g_max_num = sizeof(turnstileTable) / sizeof(transition);
-            pFsm.setCurState(istate);
-            //pFsm.setFsmTable(&caseTable[0]);
-        }
     /*state update*/
-    void _FSM_ToNewState(int state) {
-        pFsm.setCurState(state);
+    void ToNewState(int istate) {
+        curState = istate;
     }
 
     /*event handler */
-    void _FSM_EventHandle(int event) {
+    void eventHandler(int event) {
         void( * eventAction)() = NULL;
-        int currentState = pFsm.getCurState();
+        int currentState = curState;
 
         for (int j = 0; j < caseTable.size(); j++) {
             /*scan de la table*/
             if (event == caseTable[j].event && currentState == caseTable[j].state) {
                 eventAction = caseTable[j].eventActFun;
                 if (eventAction) eventAction(); // if  very important 
-                _FSM_ToNewState(caseTable[j].nextState);
+                ToNewState(caseTable[j].nextState);
                 break;
             }
         }
@@ -79,7 +63,7 @@ class fsm {
         caseTable.push_back(v);
     }
     int getcurState() {
-        return pFsm.getCurState();
+        return curState;
     }
 };
 
@@ -126,13 +110,13 @@ int main() {
     turnstile.addTransition(LOCKED, COIN, unlock, UNLOCKED);
     turnstile.addTransition(UNLOCKED, PUSH, lock, LOCKED);
 
-    int event = COIN;
+    int event = -1;
 
     while (1) {
-        printf("event %d is coming...\n", event);
-        if (event >= 0) turnstile._FSM_EventHandle(event); // event<0 no event
-        printf("fsm current state %d\n", turnstile.getcurState());
         event = processEvent();
+        printf("event %d is received...\n", event);
+        if (event >= 0) turnstile.eventHandler(event); // event<0 no event
+        printf("fsm current state %d\n", turnstile.getcurState());
 
         unsigned int retTime = time(0) + 2;
         while (time(0) < retTime);
