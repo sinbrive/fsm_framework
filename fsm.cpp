@@ -1,7 +1,7 @@
 /*********************************************************************
 sinbrive april 2020
 File Decription: Finite State Machine general framework
-Application of  wikipedia coin-operated turnstile 
+Application case : wikipedia coin-operated turnstile 
 *********************************************************************/
 #include <iostream>
 #include "fsm.h"
