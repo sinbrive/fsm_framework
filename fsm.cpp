@@ -12,21 +12,21 @@ using namespace std;
 class transition {
     public:
         int state;
-    int event;
-    void( * eventActFun)();
-    int nextState;
+        int event;
+        void( * eventActFun)();
+        int nextState;
 };
 
 class fsm {
     private:
         int _g_max_num;
-    vector < transition > caseTable;
-    int curState; //FSM
-    transition * FsmTable; //table d'état
+        vector < transition > caseTable;
+        int curState; //FSM
+        transition * FsmTable; //table d'état
 
     public:
         fsm(int istate) {
-            curState = istate;
+        curState = istate;
         }
 
     int getCurState() {
@@ -70,15 +70,14 @@ class fsm {
 //les états
 enum {
     LOCKED = 0,
-        UNLOCKED,
+    UNLOCKED,
 };
 
 //les évenments
 enum {
     COIN = 0,
-        PUSH,
+    PUSH,
 };
-int _g_max_num; //le nombre d'états
 
 void unlock();
 void lock();
