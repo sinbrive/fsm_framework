@@ -3,21 +3,21 @@
 class transition {
     public:
         int state;
-    int event;
-    void( * eventActFun)();
-    int nextState;
+        int event;
+        void( * eventActFun)();
+        int nextState;
 };
 
 class fsm {
     private:
         int _g_max_num;
-    std::vector <transition> caseTable;
-    int curState; //FSM
-    transition * FsmTable; //table d'état
+        std::vector <transition> caseTable;
+        int curState; //FSM
+        transition * FsmTable; //table d'état
 
     public:
         fsm(int istate) {
-            curState = istate;
+        curState = istate;
         }
 
     int getCurState() {
