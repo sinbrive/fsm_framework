@@ -11,13 +11,12 @@ class transition {
 class fsm {
     private:
         int _g_max_num;
-        std::vector <transition> caseTable;
-        int curState; //FSM
-        transition * FsmTable; //table d'état
+        std::vector <transition> fsmTable;
+        int curState; 
 
     public:
         fsm(int istate) {
-        curState = istate;
+            curState = istate;
         }
 
     int getCurState() {
@@ -34,12 +33,11 @@ class fsm {
         void( * eventAction)() = NULL;
         int currentState = curState;
 
-        for (int j = 0; j < caseTable.size(); j++) {
-            /*scan de la table*/
-            if (event == caseTable[j].event && currentState == caseTable[j].state) {
-                eventAction = caseTable[j].eventActFun;
-                if (eventAction) eventAction(); // if  very important 
-                ToNewState(caseTable[j].nextState);
+        for (int j = 0; j < fsmTable.size(); j++) {
+            if (event == fsmTable[j].event && currentState == fsmTable[j].state) {
+                eventAction = fsmTable[j].eventActFun;
+                if (eventAction) eventAction();  
+                ToNewState(fsmTable[j].nextState);
                 break;
             }
         }
@@ -51,8 +49,9 @@ class fsm {
         v.event = event;
         v.eventActFun = eventActFun;
         v.nextState = nextState;
-        caseTable.push_back(v);
+        fsmTable.push_back(v);
     }
+		
     int getcurState() {
         return curState;
     }
