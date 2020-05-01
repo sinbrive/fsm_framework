@@ -10,7 +10,6 @@ class transition {
 
 class fsm {
     private:
-        int _g_max_num;
         std::vector <transition> fsmTable;
         int curState; 
 
