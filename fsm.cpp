@@ -1,19 +1,20 @@
 /*********************************************************************
 sinbrive april 2020
 File Decription: Finite State Machine general framework
+Application of  wikipedia coin-operated turnstile [link](https://en.wikipedia.org/wiki/Finite-state_machine#Example:_coin-operated_turnstile)
 *********************************************************************/
 #include <iostream>
 #include "fsm.h"
 
 using namespace std;
 
-//les états
+//states
 enum {
     LOCKED = 0,
     UNLOCKED,
 };
 
-//les évenments
+//events
 enum {
     COIN = 0,
     PUSH,
